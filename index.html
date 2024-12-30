@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New Year's Countdown 2025</title>
+  <style>
+    /* Default background for mobile (or small screens) */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url('mobile.webp') no-repeat center center/cover;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+/* For larger screens (e.g., desktops) */
+@media (min-width: 768px) {
+  body {
+    background: url('desktop.webp') no-repeat center center/cover;
+  }
+}
+    .countdown-container {
+      text-align: center;
+      z-index: 1;
+    }
+    @keyframes glow {
+  0% {
+    text-shadow: 0 0 5px #ff6347, 0 0 10px #ff6347, 0 0 15px #ff6347;
+  }
+  50% {
+    text-shadow: 0 0 20px #ff6347, 0 0 30px #ff6347, 0 0 40px #ff6347;
+  }
+  100% {
+    text-shadow: 0 0 10px #ff6347, 0 0 15px #ff6347, 0 0 20px #ff6347;
+  }
+}
+
+#countdown-seconds {
+  font-size: 2em; /* Adjust the size for more visibility */
+}
+    
+    .countdown {
+      font-size: 4em;
+      font-weight: bold;
+    }
+   .hello {
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black */
+  padding: 20px;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  text-align: center;
+
+  /* Flexbox for centering */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+
+  min-height: 300px; /* Set a minimum height */
+  height: auto; /* Allow dynamic expansion */
+  overflow: visible; /* Ensure overflowing content is visible */
+  
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .hello {
+    width: 95%;
+    padding: 15px;
+    height: 250px; /* Adjust height for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .hello {
+    width: 100%;
+    padding: 10px;
+    height: 200px; /* Adjust height further for very small screens */
+  }
+}
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.9em;
+      color: #aaa;
+      margin-bottom: 10px;
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    .button {
+  display: none;
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background: linear-gradient(90deg, blue, purple); /* Blue to Purple Gradient */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Optional: Rounded corners */
+  cursor: pointer;
+  animation: myNigga 1.5s ease 10s infinite normal forwards;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth interaction */
+}
+
+.button:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+    @keyframes myAnim {
+      0% {
+        transform: scale(0);
+        transform-origin: 50% 0%;
+      }
+      100% {
+        transform: scale(1);
+        transform-origin: 50% 0%;
+      }
+    }
+
+    /* Modal Style */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
+      z-index: 999; /* Ensure modal is above everything else */
+    }
+
+   .modal-content {
+  background-color: white;
+  padding: 5%; /* Use percentage for responsive padding */
+  border-radius: 10px;
+  animation: myAnim 1s ease 0s 1 normal forwards;
+  color: black;
+  text-align: center;
+  width: 90%; /* Default width for smaller screens */
+  max-width: 500px; /* Limit the maximum width for larger screens */
+  box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Adjustments for tablets */
+@media (min-width: 768px) {
+  .modal-content {
+    width: 70%; /* Slightly larger for tablets */
+  }
+}
+
+/* Adjustments for desktops */
+@media (min-width: 1024px) {
+  .modal-content {
+    width: 50%; /* Reduce width for larger screens */
+  }
+}
+    @keyframes myNigga {
+	0% {
+		animation-timing-function: ease-out;
+		transform: scale(1);
+		transform-origin: center center;
+	}
+
+	10% {
+		animation-timing-function: ease-in;
+		transform: scale(0.91);
+	}
+
+	17% {
+		animation-timing-function: ease-out;
+		transform: scale(0.98);
+	}
+
+	33% {
+		animation-timing-function: ease-in;
+		transform: scale(0.87);
+	}
+
+	45% {
+		animation-timing-function: ease-out;
+		transform: scale(1);
+	}
+}
+
+  </style>
+</head>
+<body>
+    
+  <div class="countdown-container">
+      
+      <div class="hello">
+          <div class="date-time" id="dateTime"></div>
+        <div class="countdown" id="countdown"></div>
+        
+      </div>
+      <div class="footer">Brought to you by the Information and Communication Technology Club<br>Powered by <strong>PD Sites</strong></div>
+      <button class="button" id="popupButton">Click me</button>
+  </div>
+  <canvas id="fireworks"></canvas>
+
+  <!-- Modal for Pop-up Message -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <p id="popupMessage">
+Hey everyone, 2025 is here, and it’s time to make it count. This year, let’s not just focus on the textbooks and exams, but on pushing ourselves to grow and create something truly amazing. We’re in this together, coding, learning, and building a program that has the potential to change everything. It won’t always be easy, but we’ve got each other’s backs.
+<br><br>
+Let’s keep that energy up, be there for one another, and celebrate every little win along the way. We have the power to make this year our best one yet, and to build something that could change the world. Let’s take on this challenge with all we’ve got, and make 2025 the year we show just what we’re capable of. We’ve got this—let’s go for it!
+<br><br>
+— Prince Dale <3 (of 12 ICT A)
+</p>
+      <button onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const countdownEl = document.getElementById('countdown');
+    const dateTimeEl = document.getElementById('dateTime');
+    const fireworksCanvas = document.getElementById('fireworks');
+    const ctx = fireworksCanvas.getContext('2d');
+    const popupButton = document.getElementById('popupButton');
+    const modal = document.getElementById('myModal');
+    const popupMessage = document.getElementById('popupMessage');
+
+    function updateDateTime() {
+      const now = new Date();
+      dateTimeEl.textContent = now.toLocaleString('en-PH', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        timeZone: 'Asia/Manila'
+      }).replace(",","").replace("AM","AM").replace("PM","PM");
+    }
+
+    function updateCountdown() {
+  const now = new Date();
+  // Set target time to 1:14 AM today
+  const targetTime = new Date('2025-01-01T00:00:00+08:00'); // Jan 1, 2025 at midnight
+  const diff = targetTime - new Date();
+
+  if (diff <= 0) {
+    startFireworks();
+    countdownEl.textContent = "HAPPY NEW YEAR!";
+    popupButton.style.display = 'inline-block'; // Show the button after countdown
+    return;
+  }
+
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  // Format hours, minutes, and seconds with padding for single digits
+  const formattedHours = hours > 0 ? hours : ''; // Hide hours if 0
+  const formattedMinutes = minutes > 0 || hours > 0 ? minutes : '';  // Don't show minutes if 0
+  const formattedSeconds = seconds.toString().padStart(2, '0'); // Ensure two digits for seconds
+
+  // Build the countdown display
+  let countdownText = '';
+
+  if (formattedHours) {
+    countdownText += `${formattedHours}:`;
+  }
+
+  if (formattedMinutes) {
+    countdownText += `${formattedMinutes}:`;
+  }
+
+  countdownText += formattedSeconds; // Always show seconds with padding
+
+  countdownEl.innerHTML = countdownText;
+
+  // Add glowing effect only when seconds <= 10 and at the start of the minute (00 minutes)
+  if (seconds <= 10 && minutes === 0) {
+    countdownEl.style.animation = 'glow 1s ease-in-out infinite alternate';
+    countdownEl.style.color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Change color dynamically
+    countdownEl.style.fontSize = '3em'; // Increase font size when seconds <= 10
+  } else {
+    countdownEl.style.animation = ''; // Reset animation after 10 seconds
+    countdownEl.style.color = ''; // Reset color
+    countdownEl.style.fontSize = '2em'; // Keep font size at 2em for seconds above 10
+  }
+}
+
+    function startFireworks() {
+  let particles = [];
+  fireworksCanvas.width = window.innerWidth;
+  fireworksCanvas.height = window.innerHeight;
+
+  function Particle(x, y) {
+    this.x = x;
+    this.y = y;
+    this.vx = Math.random() * 6 - 3; // Increased velocity for more lively particles
+    this.vy = Math.random() * 6 - 3; // Increased velocity for more lively particles
+    this.alpha = 1;
+    this.size = Math.random() * 4 + 2; // Larger particles
+    this.lifeSpan = Math.random() * 60 + 60; // Longer lifespan for particles
+    this.age = 0; // Initialize age
+  }
+
+  Particle.prototype.update = function () {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.alpha = 1 - (this.age / this.lifeSpan); // Gradually fade particles based on age
+    this.size = Math.max(2, this.size - 0.05); // Slowly shrink the size of particles
+    this.age++; // Increment age
+  };
+
+  Particle.prototype.draw = function () {
+    ctx.globalAlpha = this.alpha;
+    ctx.fillStyle = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+    ctx.fill();
+  };
+
+  function createFireworks() {
+    const x = Math.random() * fireworksCanvas.width;
+    const y = Math.random() * fireworksCanvas.height / 2;
+    for (let i = 0; i < 400; i++) { // Increased number of particles
+      particles.push(new Particle(x, y));
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, fireworksCanvas.width, fireworksCanvas.height);
+    particles = particles.filter(p => p.age < p.lifeSpan); // Keep particles until lifespan ends
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    if (Math.random() < 0.1) {
+      createFireworks(); // Keep creating fireworks
+    }
+    requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+    // Function to open the modal
+    function openModal() {
+  modal.style.display = 'flex'; // Show the modal without changing its content
+}
+
+    // Function to close the modal
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    // Event listener for the button
+    popupButton.addEventListener('click', function() {
+  openModal(); // Call openModal without arguments
+});
+
+    updateDateTime();
+    updateCountdown();
+    setInterval(updateDateTime, 1000);
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
